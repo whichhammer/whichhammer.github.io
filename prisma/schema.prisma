@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model competition {
+  id                     Int                      @id @unique(map: "competition_id_uindex") @default(autoincrement())
+  name                   String                   @unique(map: "competition_name_uindex") @db.VarChar(255)
+  game_id                Int?
+  ruleset_id             Int?
+  type_id                Int?
+  competition_moderators competition_moderators[]
+  match                  match[]
+}
+
+model competition_moderators {
+  id             Int         @id @unique(map: "competition_moderators_id_uindex") @default(autoincrement())
+  competition_id Int
+  user_id        Int
+  competition    competition @relation(fields: [competition_id], references: [id], onUpdate: Restrict, map: "competition_moderators_competition_id_fk")
+  user           user        @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "competition_moderators_user_id_fk")
+
+  @@index([competition_id], map: "competition_moderators_competition_id_fk")
+  @@index([user_id], map: "competition_moderators_user_id_fk")
+}
+
+model competition_team {
+  id                    Int                     @id @unique(map: "competition_team_id_uindex") @default(autoincrement())
+  name                  String                  @db.VarChar(255)
+  rank                  Int
+  competition_team_user competition_team_user[]
+}
+
+model competition_team_user {
+  id                  Int              @id @unique(map: "competition_team_user_id_uindex") @default(autoincrement())
+  competition_team_id Int
+  user_id             Int
+  competition_team    competition_team @relation(fields: [competition_team_id], references: [id], onUpdate: Restrict, map: "competition_team_user_competition_team_id_fk")
+  user                user             @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "competition_team_user_user_id_fk")
+
+  @@index([competition_team_id], map: "competition_team_user_competition_team_id_fk")
+  @@index([user_id], map: "competition_team_user_user_id_fk")
+}
+
+model match {
+  id             Int           @id @unique(map: "match_id_uindex") @default(autoincrement())
+  date           DateTime      @db.DateTime(0)
+  competition_id Int
+  venue_id       Int
+  status         match_status?
+  competition    competition   @relation(fields: [competition_id], references: [id], onUpdate: Restrict, map: "match_competition_id_fk")
+  venue          venue         @relation(fields: [venue_id], references: [id], onUpdate: Restrict, map: "match_venue_id_fk")
+  match_team     match_team[]
+
+  @@index([competition_id], map: "match_competition_id_fk")
+  @@index([venue_id], map: "match_venue_id_fk")
+}
+
+model match_team {
+  id        Int    @id @unique(map: "match_team_id_uindex") @default(autoincrement())
+  team_name String @db.VarChar(255)
+  match_id  Int
+  user_id   Int
+  match     match  @relation(fields: [match_id], references: [id], onUpdate: Restrict, map: "match_team_match_id_fk")
+  user      user   @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "match_team_user_id_fk")
+
+  @@index([match_id], map: "match_team_match_id_fk")
+  @@index([user_id], map: "match_team_user_id_fk")
+}
+
+model user {
+  id                     Int                      @id @unique(map: "user_id_uindex") @default(autoincrement())
+  display_name           String?                  @db.VarChar(255)
+  competition_moderators competition_moderators[]
+  competition_team_user  competition_team_user[]
+  match_team             match_team[]
+}
+
+model venue {
+  id      Int     @id @unique(map: "venue_id_uindex") @default(autoincrement())
+  name    String? @db.VarChar(255)
+  address String  @db.VarChar(255)
+  match   match[]
+}
+
+enum match_status {
+  pending
+  complete
+  cancelled
+}
