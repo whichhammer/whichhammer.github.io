@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import {DatasheetImporter} from "@/lib/data/DatasheetImporter";
-import {DatasheetModelImporter} from "@/lib/data/DatasheetModelImporter";
+import { DatasheetImporter } from "@/lib/data/DatasheetImporter";
+import { DatasheetModelImporter } from "@/lib/data/DatasheetModelImporter";
 
 export class Wahapedia {
 
@@ -12,11 +12,11 @@ export class Wahapedia {
     console.log('Got all Datasheets');
     await datasheetModelImporter.upsert(client);
     console.log('done');
-    await client.$disconnect()
-      .catch(async (e) => {
-        console.error(e)
-        await client.$disconnect()
-        process.exit(1)
-      });
+    // await client.$disconnect()
+    //   .catch(async (e) => {
+    //     console.error(e)
+    //     await client.$disconnect()
+    //     process.exit(1)
+    //   });
   }
 }

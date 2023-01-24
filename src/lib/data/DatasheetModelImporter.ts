@@ -72,7 +72,7 @@ export class DatasheetModelImporter {
             case 'base_size_descr':
               return value == '' ? null : value;
             default:
-              return value;
+              return value.replace(/(<([^>]+)>)/gi, "");
           }
         }
       }))
