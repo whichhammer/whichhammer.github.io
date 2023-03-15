@@ -1,13 +1,17 @@
 import {PrismaClient} from "@prisma/client";
 import fs from "fs";
 import * as csvParser from "csv-parser";
+import {Factions} from "@/lib/data/Factions";
 
 export class DatasheetImporter {
   client: PrismaClient;
+  factions: Factions;
   readonly datasheetPath = __dirname + '/../../../../data/Datasheets.csv';
 
   constructor(client: PrismaClient) {
     this.client = client;
+    this.factions = new Factions();
+    this.factions.init();
   }
 
   async upsert(client: PrismaClient) {
@@ -63,7 +67,10 @@ export class DatasheetImporter {
           }
         }
       }))
-      .on('data', (data: any) => results.push(data))
+      .on('data', async (data: any) => {
+        data['parent_faction_name'] = this.factions.lookup(data['faction_id'])?.name;
+        results.push(data);
+      })
       .on('end', () => this.saveToDb(client, results));
   }
 

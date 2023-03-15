@@ -8,11 +8,9 @@ type ModelValue = {
 export class RadarDataMetric {
   subject: string;
   values: ModelValue[] = [];
-  fullMark: number;
 
-  constructor(subject: string, fullMark: number = 1) {
+  constructor(subject: string) {
     this.subject = subject;
-    this.fullMark = fullMark;
   }
 
   addModel(model: ModelProps) {
@@ -45,11 +43,36 @@ export class RadarDataMetric {
       case 'Saves':
         v = model.sv;
         break;
+      case 'Cost':
+        v = model.cost;
+        break;
     }
     this.values.push({
       id: model.id,
       value: v,
     });
+  }
+
+  public getMin(): number {
+    switch (this.subject) {
+      case 'Weapons Skill':
+      case 'Ballistic Skill':
+      case 'Saves':
+        return 7;
+      default:
+        return 0;
+    }
+  }
+
+  public getMax(): number | null{
+    switch (this.subject) {
+      case 'Weapons Skill':
+      case 'Ballistic Skill':
+      case 'Saves':
+        return 0;
+      default:
+        return null;
+    }
   }
 
   getViewData() {
@@ -63,8 +86,41 @@ export class RadarDataMetric {
     return data;
   }
 
-  private calculateFullMark() {
-    this.fullMark = Math.max(...this.values.map(v => v.value));
-    return this.fullMark;
+  public calculateFullMark() {
+    const fullMark = Math.max(...this.values.map(v => v.value));
+    // check against some min maximum (...) values
+    switch (this.subject) {
+      case 'Weapons Skill':
+      case 'Ballistic Skill':
+      case 'Saves':
+        if (fullMark < 6) {
+          return 6;
+        }
+        break;
+      case 'Strength':
+      case 'Toughness':
+      case 'Movement':
+        if (fullMark < 8) {
+          return 8;
+        }
+        break;
+      case 'Leadership':
+        if (fullMark < 10) {
+          return 10;
+        }
+        break;
+      case 'Wounds':
+      case 'Attacks':
+        if (fullMark < 6) {
+          return 6;
+        }
+        break;
+      case 'Cost':
+        if (fullMark < 60) {
+          return 60;
+        }
+        break;
+    }
+    return fullMark;
   }
 }

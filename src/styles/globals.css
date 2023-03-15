@@ -1,0 +1,11 @@
+#chartContainer {
+    height: 400px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.bi-box-arrow-up-right {
+    font-size: 0.6em;
+    top: -1em;
+    position: relative;
+}

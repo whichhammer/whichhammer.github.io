@@ -1,6 +1,12 @@
 import {ModelProps} from "@/components/Model";
 import {RadarDataMetric} from "@/lib/view/RadarDataMetric";
 
+export type RadarIndicator = {
+  name: string,
+  min: number,
+  max: number
+}
+
 export class RadarData {
   models: ModelProps[] | undefined;
   metrics: RadarDataMetric[] = [];
@@ -20,15 +26,44 @@ export class RadarData {
     this.metrics.push(new RadarDataMetric('Attacks'));
     this.metrics.push(new RadarDataMetric('Leadership'));
     this.metrics.push(new RadarDataMetric('Saves'));
+    this.metrics.push(new RadarDataMetric('Cost'));
   }
 
   addModel(model: ModelProps) {
     this.metrics.map(metric => metric.addModel(model));
   }
 
+  getIndicators(): RadarIndicator[]  {
+    const indicators: RadarIndicator[] = [];
+    this.metrics.map(metric => indicators.push(
+      <RadarIndicator>{
+        name: metric.subject,
+        min: 0,
+        max: metric.calculateFullMark()
+      }
+    ));
+    console.log(indicators);
+    return indicators;
+  }
+
+  getModelValues(model: ModelProps): number[] {
+    return [
+      model.m,
+      model.ws,
+      model.bs,
+      model.s,
+      model.t,
+      model.w,
+      model.a,
+      model.ld,
+      model.sv,
+      model.cost
+    ]
+  }
+
   getViewData() {
     const data: any[] = [];
-    this.metrics.map(metric => data.push(metric.getViewData()));
+    this.metrics.map(metric => data.push());
     return data;
   }
 
@@ -40,16 +75,6 @@ export class RadarData {
     this.init();
     this.models = models;
     this.models.map(model => this.addModel(model));
-  }
-
-  getMaxFullMark(): number {
-    let max = 0;
-    this.metrics.map(metric => {
-      if (metric.fullMark > max) {
-        max = metric.fullMark;
-      }
-    });
-    return max;
   }
 
 }
