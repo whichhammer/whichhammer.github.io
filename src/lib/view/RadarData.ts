@@ -42,7 +42,7 @@ export class RadarData {
         max: metric.calculateFullMark()
       }
     ));
-    console.log(indicators);
+    
     return indicators;
   }
 

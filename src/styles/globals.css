@@ -5,7 +5,16 @@
 }
 
 .bi-box-arrow-up-right {
-    font-size: 0.6em;
-    top: -1em;
+    top: -0.1em;
     position: relative;
+}
+
+.footer {
+    background-color: rgb(53, 54, 58);
+    color: #fff;
+    width: 100%;
+}
+
+.text-right {
+    text-align: right;
 }

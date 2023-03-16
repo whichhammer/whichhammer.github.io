@@ -144,9 +144,28 @@ const Home: React.FC<Props> = (props) => {
               <Model key={idx} idx={idx} m={model} />
             ))}
           </div>
+
         </div>
 
       </main>
+      <div className="fixed-bottom footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-5">
+              <p>
+                Data provided by <a href="https://wahapedia.ru/wh40k9ed/the-rules/data-export/">wahapedia</a>
+              </p>
+            </div>
+            <div className="col-5 ms-auto">
+              <p className="text-right">
+                Project code <a href="https://github.com/whichhammer/whichhammer.github.io"><i className="bi bi-github"></i></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </>
   )
 }
