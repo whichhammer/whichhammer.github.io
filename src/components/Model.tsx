@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export type ModelProps = {
   id: number;
@@ -32,10 +33,11 @@ const Model: React.FC<{ m: ModelProps, idx: number }> = ({ m, idx }) => {
       </h2>
       <small>{m.datasheet.parent_faction_name}</small>
       <div style={{position: 'relative'}}>
-        <img style={{maxWidth: '100%', maxHeight: '120px'}} src={m.datasheet.image} alt={m.name} />
+        {/*<Image fill={true} style={{maxWidth: '100%', maxHeight: '120px'}} src={m.datasheet.image} alt={m.name} />*/}
+        <img src={m.datasheet.image} style={{maxWidth: '100%', maxHeight: '120px'}} alt={m.name} />
       </div>
       <p>
-        <a className="btn btn-link" role="button" href={m.datasheet.link} target={"_blank"}>View details <i className="bi bi-box-arrow-up-right"></i></a>
+        <a className="btn btn-link" role="button" href={m.datasheet.link} target={"_blank"}  rel="noreferrer">View details <i className="bi bi-box-arrow-up-right"></i></a>
       </p>
     </div>
   );

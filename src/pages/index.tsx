@@ -2,11 +2,12 @@ import Head from "next/head";
 import React, { useState } from 'react';
 import Model, { ModelProps } from "../components/Model";
 import { RadarData } from "@/lib/view/RadarData";
-import {Highlighter, Token, Typeahead} from 'react-bootstrap-typeahead';
+import { Highlighter, Token, Typeahead } from 'react-bootstrap-typeahead';
+import { Option } from "react-bootstrap-typeahead/types/types";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import type { EChartsOption } from "echarts";
-import {ReactECharts} from "@/components/React-ECharts";
+import { ReactECharts } from "@/components/React-ECharts";
 
 type Props = {
   feed: ModelProps[];
@@ -18,7 +19,7 @@ const Home: React.FC<Props> = (props) => {
   const radarData = new RadarData();
   const options: ModelProps[] = props.feed;
 
-  const [multiSelections, setMultiSelections] = useState([]);
+  const [multiSelections, setMultiSelections] = useState<ModelProps[]>([] as ModelProps[]);
 
   if (multiSelections.length > 0) {
     radarData.setModels(multiSelections);
@@ -92,28 +93,39 @@ const Home: React.FC<Props> = (props) => {
                 <a className="navbar-brand" href="#">Whichhammer?</a>
                 <Typeahead
                     id="basic-typeahead-multiple"
-                    labelKey={(m: ModelProps) => `${m.datasheet.parent_faction_name} ${m.name}`}
+                    labelKey={(option: Option) => {
+                      const m = option as ModelProps;
+                      return `${m.datasheet.parent_faction_name} ${m.name}`
+                    }}
                     multiple
                     onChange={(s) => {
-                      // @ts-ignore
-                      setMultiSelections(s);
+                      if (s.length > 0) {
+                        const m = s as ModelProps[];
+                        setMultiSelections(m);
+                      }
                     }}
                     options={options}
                     placeholder="Choose several models..."
                     selected={multiSelections}
-                    renderMenuItemChildren={(m: ModelProps, { text }) => (
-                      <>
-                        <Highlighter search={text}>{m.name}</Highlighter>,
-                        <div>
-                          <small>{m.datasheet.parent_faction_name}</small>
-                        </div>
-                      </>
-                    )}
-                    renderToken={(m: ModelProps, { onRemove }, index) => (
-                      <Token key={index} onRemove={onRemove} option={m}>
-                        {`${m.name}`}
-                      </Token>
-                    )}
+                    renderMenuItemChildren={(option: Option, { text }) => {
+                      const m = option as ModelProps;
+                      return (
+                        <>
+                          <Highlighter search={text}>{m.name}</Highlighter>,
+                          <div>
+                            <small>{m.datasheet.parent_faction_name}</small>
+                          </div>
+                        </>
+                      )}
+                    }
+                    renderToken={(option: Option, { onRemove }, index) => {
+                      const m = option as ModelProps;
+                      return (
+                        <Token key={index} onRemove={onRemove} option={m}>
+                          {`${m.name}`}
+                        </Token>
+                      )
+                    }}
                   />
 
               </nav>
@@ -129,7 +141,7 @@ const Home: React.FC<Props> = (props) => {
           </div>
           <div className="row">
             {radarData.getModels().map((model, idx) => (
-              <Model idx={idx} m={model} />
+              <Model key={idx} idx={idx} m={model} />
             ))}
           </div>
         </div>
@@ -145,12 +157,12 @@ import fsPromises from 'fs/promises';
 import path from 'path'
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'data', 'feed.json');
-  const jsonData = await fsPromises.readFile(filePath);
+  const jsonData = await fsPromises.readFile(filePath, 'utf8');
   const feed: ModelProps[] = JSON.parse(jsonData);
 
   return {
     props: {
-      feed: feed,
+      feed: feed ? feed : [],
       fillColour: ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown', 'grey', 'black', 'white'],
       strokeColour: ['darkred', 'darkblue', 'darkgreen', 'darkyellow', 'darkorange', 'darkpurple', 'darkpink', 'darkbrown', 'darkgrey', 'darkblack', 'darkwhite'],
     }
