@@ -73,8 +73,6 @@ const Home: React.FC<Props> = (props) => {
     ]
   };
 
-  console.log(chartOptions);
-
   return (
     <>
       <Head>
@@ -98,12 +96,7 @@ const Home: React.FC<Props> = (props) => {
                       return `${m.datasheet.parent_faction_name} ${m.name}`
                     }}
                     multiple
-                    onChange={(s) => {
-                      if (s.length > 0) {
-                        const m = s as ModelProps[];
-                        setMultiSelections(m);
-                      }
-                    }}
+                    onChange={(m) => setMultiSelections(m as ModelProps[])}
                     options={options}
                     placeholder="Choose several models..."
                     selected={multiSelections}
