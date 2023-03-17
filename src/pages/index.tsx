@@ -151,7 +151,8 @@ const Home: React.FC<Props> = (props) => {
             </div>
             <div className="col-5 ms-auto">
               <p className="text-right">
-                Project code <a href="https://github.com/whichhammer/whichhammer.github.io"><i className="bi bi-github"></i></a>
+                Project code <a href="https://github.com/whichhammer/whichhammer.github.io"><i className="bi bi-github"></i></a><br />
+                Cookies used for analytics
               </p>
             </div>
           </div>
