@@ -12,7 +12,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const results = await prisma.datasheet_model.findMany({
+  return await prisma.datasheet_model.findMany({
     include: {
       datasheet: true,
     },
@@ -28,20 +28,22 @@ export default async function handler(
         name: 'asc',
       },
     ]
+  }).then((results) => {
+    const FEED_PATH = path.resolve(path.join(process.cwd(), 'data', 'feed-update.json'));
+    try {
+      fs.writeFileSync(
+        FEED_PATH,
+        JSON.stringify(results, null, 2), {
+          flag: 'w'
+        }
+      )
+      console.log("donez");
+      res.status(200);
+    } catch (error: any) {
+      res.status(500).json({name: error.toString()});
+    }
   });
-  const FEED_PATH = path.resolve(path.join(process.cwd(), 'data', 'feed-update.json'));
-  try {
-    fs.writeFileSync(
-      FEED_PATH,
-      JSON.stringify(results), {
-        flag: 'w'
-      }
-    )
-  } catch (error: any) {
-    res.status(500).json({ name: error.toString() });
-  }
 
-  res.status(200);
 }
 
 
