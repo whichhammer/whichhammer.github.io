@@ -4,7 +4,8 @@ import {RadarDataMetric} from "@/lib/view/RadarDataMetric";
 export type RadarIndicator = {
   name: string,
   min: number,
-  max: number
+  max: number,
+  inverse: boolean,
 }
 
 export class RadarData {
@@ -38,8 +39,9 @@ export class RadarData {
     this.metrics.map(metric => indicators.push(
       <RadarIndicator>{
         name: metric.subject,
-        min: 0,
-        max: metric.calculateFullMark()
+        min: metric.calculateMinMark(),
+        max: metric.calculateMaxMark(),
+        inverse: metric.isInversed()
       }
     ));
 

@@ -22,7 +22,7 @@
     "bootstrap-icons": "^1.10.3",
     "csv-parse": "^5.3.3",
     "csv-parser": "^3.0.0",
-    "echarts-for-react": "^3.0.2",
+    "echarts": "github:jasonpaige/echarts#master",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
     "next": "13.1.2",

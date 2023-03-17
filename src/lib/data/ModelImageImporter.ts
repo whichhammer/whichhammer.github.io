@@ -4,8 +4,8 @@ import axios, { AxiosInstance } from 'axios';
 
 export class ModelImageImporter {
 
-  readonly googleApiKey = 'AIzaSyAk8QpmoJizpTRGfz7MBr158ExwmyIk84E';
-  readonly googleSearchEngineId = '6044285f3b17f45f4';
+  readonly googleApiKey = '';
+  readonly googleSearchEngineId = '';
   private httpClient: AxiosInstance;
 
   constructor() {

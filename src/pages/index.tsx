@@ -50,18 +50,16 @@ const Home: React.FC<Props> = (props) => {
     responsive: true,
     maintainAspectRatio: true,
     renderer: 'svg',
-    radar: [
-      {
-        indicator: radarData.getIndicators(),
-        radius: 120,
-        axisName: {
-          color: '#fff',
-          backgroundColor: '#666',
-          borderRadius: 3,
-          padding: [3, 5]
-        }
+    radar: {
+      indicator: radarData.getIndicators(),
+      radius: 120,
+      axisName: {
+        color: '#fff',
+        backgroundColor: '#666',
+        borderRadius: 3,
+        padding: [3, 5]
       }
-    ],
+    },
     series: [
       {
         type: 'radar',
@@ -74,6 +72,8 @@ const Home: React.FC<Props> = (props) => {
       },
     ]
   };
+
+  console.log(chartOptions);
 
   return (
     <>

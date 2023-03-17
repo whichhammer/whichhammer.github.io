@@ -75,28 +75,15 @@ export class RadarDataMetric {
     }
   }
 
-  getViewData() {
-    const data = {
-      subject: this.subject,
-      fullMark: this.calculateFullMark(),
-    };
-    // @ts-ignore
-    this.values.map(value => data[value.id] = value.value);
-
-    return data;
-  }
-
-  public calculateFullMark() {
-    const fullMark = Math.max(...this.values.map(v => v.value));
+  public calculateMaxMark() {
+    const fullMark = this.getHighestValue();
     // check against some min maximum (...) values
     switch (this.subject) {
       case 'Weapons Skill':
       case 'Ballistic Skill':
       case 'Saves':
-        if (fullMark < 6) {
-          return 6;
-        }
-        break;
+      case 'Cost':
+        return 0;
       case 'Strength':
       case 'Toughness':
       case 'Movement':
@@ -115,12 +102,50 @@ export class RadarDataMetric {
           return 6;
         }
         break;
+    }
+    return fullMark;
+  }
+
+  private getHighestValue(): number {
+    return Math.max(...this.values.map(v => v.value));
+  }
+
+  public calculateMinMark() {
+    const fullMark = this.getHighestValue();
+    // check against some min maximum (...) values
+    switch (this.subject) {
+      case 'Weapons Skill':
+      case 'Ballistic Skill':
+      case 'Saves':
+        if (fullMark < 6) {
+          return 6;
+        }
+        break;
+      case 'Strength':
+      case 'Toughness':
+      case 'Movement':
+      case 'Leadership':
+      case 'Wounds':
+      case 'Attacks':
+        return 0;
       case 'Cost':
         if (fullMark < 60) {
           return 60;
         }
-        break;
+        return fullMark + 50;
     }
     return fullMark;
+  }
+
+  public isInversed(): boolean {
+    switch (this.subject) {
+      case 'Weapons Skill':
+      case 'Ballistic Skill':
+      case 'Saves':
+      case 'Cost':
+        return true;
+      default:
+        return false;
+    }
   }
 }
