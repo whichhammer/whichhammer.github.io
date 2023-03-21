@@ -4,8 +4,6 @@ GC|Genestealer Cults|https://wahapedia.ru/wh40k9ed/factions/genestealer-cults|fa
 NEC|Necrons|https://wahapedia.ru/wh40k9ed/factions/necrons|false||
 AE|Aeldari|https://wahapedia.ru/wh40k9ed/factions/aeldari|false||
 TL|Titan Legions|https://wahapedia.ru/wh40k9ed/factions/titan-legions|false||
-OA|Officio Assassinorum|https://wahapedia.ru/wh40k9ed/factions/officio-assassinorum|false||
-INQ|Inquisition|https://wahapedia.ru/wh40k9ed/factions/inquisition|false||
 ORK|Orks|https://wahapedia.ru/wh40k9ed/factions/orks|false||
 RT|Rogue Traders|https://wahapedia.ru/wh40k9ed/factions/rogue-traders|false||
 CHEM|Emperor’s Spears|https://wahapedia.ru/wh40k9ed/factions/space-marines/emperor-s-spears|true|SM|
@@ -48,6 +46,7 @@ CHRS|Red Scorpions|https://wahapedia.ru/wh40k9ed/factions/space-marines/red-scor
 CHSO|Sons of Medusa|https://wahapedia.ru/wh40k9ed/factions/space-marines/sons-of-medusa|true|SM|
 CHSP|Star Phantoms|https://wahapedia.ru/wh40k9ed/factions/space-marines/star-phantoms|true|SM|
 CHTC|Tiger Claws|https://wahapedia.ru/wh40k9ed/factions/space-marines/tiger-claws|true|SM|
+WE|World Eaters|https://wahapedia.ru/wh40k9ed/factions/world-eaters|false||
 QT|Chaos Knights|https://wahapedia.ru/wh40k9ed/factions/chaos-knights|false||
 HTL|Heretic Titan Legions|https://wahapedia.ru/wh40k9ed/factions/heretic-titan-legions|false||
 CD|Chaos Daemons|https://wahapedia.ru/wh40k9ed/factions/chaos-daemons|false||
@@ -74,7 +73,6 @@ DRU|Drukhari|https://wahapedia.ru/wh40k9ed/factions/drukhari|false||
 RaH|Renegades and Heretics|https://wahapedia.ru/wh40k9ed/factions/renegades-and-heretics|false||
 CHWO|Wolfspear|https://wahapedia.ru/wh40k9ed/factions/space-marines/wolfspear|true|SM|
 CHC0|No supplements|https://wahapedia.ru/wh40k9ed/factions/space-marines/no-supplements|true|SM|
-CA|Astra Cartographica|https://wahapedia.ru/wh40k9ed/factions/astra-cartographica|false||
 CWAL|Alaitoc|https://wahapedia.ru/wh40k9ed/factions/aeldari/alaitoc|true|AE|
 CWBT|Biel-Tan|https://wahapedia.ru/wh40k9ed/factions/aeldari/biel-tan|true|AE|
 CWIY|Iyanden|https://wahapedia.ru/wh40k9ed/factions/aeldari/iyanden|true|AE|
@@ -85,6 +83,11 @@ CWHA|Harlequins|https://wahapedia.ru/wh40k9ed/factions/aeldari/harlequins|true|A
 CWAR|Altansar|https://wahapedia.ru/wh40k9ed/factions/aeldari/altansar|true|AE|
 CHCR|Castellans of the Rift|https://wahapedia.ru/wh40k9ed/factions/space-marines/castellans-of-the-rift|true|SM|
 LoV|Leagues of Votann|https://wahapedia.ru/wh40k9ed/factions/leagues-of-votann|false||
+AMMT|Militarum Tempestus|https://wahapedia.ru/wh40k9ed/factions/astra-militarum/militarum-tempestus|true|AM|
+AMBB|Brood Brothers|https://wahapedia.ru/wh40k9ed/factions/astra-militarum/brood-brothers|true|AM|
+AoI|Agents of the Imperium|https://wahapedia.ru/wh40k9ed/factions/agents-of-the-imperium|false||
+WEWW|World-Eaters|https://wahapedia.ru/wh40k9ed/factions/world-eaters/world-eaters|true|WE|
+WERA|Disciples of the Red Angel|https://wahapedia.ru/wh40k9ed/factions/world-eaters/disciples-of-the-red-angel|true|WE|
 CLBM|Bad Moons|https://wahapedia.ru/wh40k9ed/factions/orks|true|ORK|
 CLBA|Blood Axes|https://wahapedia.ru/wh40k9ed/factions/orks|true|ORK|
 CLDS|Deathskulls|https://wahapedia.ru/wh40k9ed/factions/orks|true|ORK|
@@ -192,3 +195,9 @@ LUKH|Kronus Hegemony|https://wahapedia.ru/wh40k9ed/factions/leagues-of-votann|tr
 LUTH|Trans-Hyperian Alliance|https://wahapedia.ru/wh40k9ed/factions/leagues-of-votann|true|LoV|
 LUUS|Urani-Surtr Regulates|https://wahapedia.ru/wh40k9ed/factions/leagues-of-votann|true|LoV|
 LUYC|Ymyr Conglomerate|https://wahapedia.ru/wh40k9ed/factions/leagues-of-votann|true|LoV|
+SHAS|Aquilan Shield|https://wahapedia.ru/wh40k9ed/factions/adeptus-custodes|true|AC|
+SHDH|Dread Host|https://wahapedia.ru/wh40k9ed/factions/adeptus-custodes|true|AC|
+SHEI|Emissaries Imperatus|https://wahapedia.ru/wh40k9ed/factions/adeptus-custodes|true|AC|
+SHEC|Emperor’s Chosen|https://wahapedia.ru/wh40k9ed/factions/adeptus-custodes|true|AC|
+SHSK|Shadowkeepers|https://wahapedia.ru/wh40k9ed/factions/adeptus-custodes|true|AC|
+SHSW|Solar Watch|https://wahapedia.ru/wh40k9ed/factions/adeptus-custodes|true|AC|
