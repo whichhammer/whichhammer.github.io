@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 
 export type ModelProps = {
   id: number;
@@ -15,6 +14,7 @@ export type ModelProps = {
   sv: number;
   cost: number;
   datasheet: DatasheetProps;
+  models_per_unit: number;
 };
 
 export type DatasheetProps = {
@@ -23,6 +23,8 @@ export type DatasheetProps = {
   image: string;
   link: string;
   parent_faction_name: string;
+  cost: number;
+  cost_per_unit: boolean;
 }
 
 const Model: React.FC<{ m: ModelProps, idx: number }> = ({ m, idx }) => {

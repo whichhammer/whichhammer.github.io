@@ -48,7 +48,18 @@ export class RadarData {
     return indicators;
   }
 
-  getModelValues(model: ModelProps): number[] {
+    getModelValues(model: ModelProps): number[] {
+    const cost = () => {
+      if (model.cost === 0) {
+        if (model.datasheet.cost_per_unit) {
+          return model.datasheet.cost / model.models_per_unit;
+        } else {
+          return model.datasheet.cost;
+        }
+      }
+      return model.cost
+    }
+
     return [
       model.m,
       model.ws,
@@ -59,7 +70,7 @@ export class RadarData {
       model.a,
       model.ld,
       model.sv,
-      model.cost
+      cost()
     ]
   }
 
